@@ -1,0 +1,43 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "needle"
+version = "0.0.1"
+authors = [
+    { name = "Onur Eken", email = "m.onureken@gmail.com" },
+    { name = "Jan Heimes", email = "heimesjan9@gmail.com" },
+]
+description = "Needle client library for Python"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/oeken/needle-python"
+Issues = "https://github.com/oeken/needle-python/issues"
+
+
+[tool.poetry]
+name = "needle-python"
+version = "0.1.0"
+description = "Needle client library for Python"
+authors = [
+    "Onur Eken <m.onureken@gmail.com>",
+    "Jan Heimes <heimesjan9@gmail.com>",
+]
+readme = "README.md"
+packages = [{ include = "needle" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.32.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.2.2"
+openai = "^1.39.0"

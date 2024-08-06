@@ -1,0 +1,125 @@
+"""
+This module provides NeedleCollections class for interacting with Needle API's collections endpoint.
+"""
+
+from typing import Optional
+
+import requests
+
+from needle.v1.models import (
+    NeedleConfig,
+    NeedleBaseClient,
+    Collection,
+    Error,
+    SearchResult,
+)
+from needle.v1.collections.files import NeedleCollectionsFiles
+
+
+class NeedleCollections(NeedleBaseClient):
+    """
+    A client for interacting with the Needle API's collections endpoint.
+
+    This class provides methods to create and manage collections within the Needle API.
+    It uses a requests session to handle HTTP requests with a default timeout of 120 seconds.
+    """
+
+    def __init__(self, config: NeedleConfig, headers: dict):
+        super().__init__(config, headers)
+
+        self.endpoint = f"{config.url}/api/v1/collections"
+        self.search_endpoint = f"{config.search_url}/api/v1/collections"
+
+        # requests config
+        self.session = requests.Session()
+        self.session.headers.update(headers)
+        self.session.timeout = 120
+
+        # sub clients
+        self.files = NeedleCollectionsFiles(config, headers)
+
+    def create(self, name: str, file_ids: Optional[list[str]] = None):
+        """
+        Creates a new collection with the specified name and file IDs.
+
+        Args:
+            name (str): The name of the collection.
+            file_ids (Optiona[list[str]]): A list of file IDs to include in the collection.
+
+        Returns:
+            Collection: The created collection object.
+
+        Raises:
+            Error: If the API request fails.
+        """
+        req_body = {"name": name, "file_ids": file_ids}
+        resp = self.session.post(
+            f"{self.endpoint}",
+            json=req_body,
+        )
+        body = resp.json()
+        if resp.status_code >= 400:
+            error = body.get("error")
+            raise Error(**error)
+        c = body.get("result")
+        return Collection(**c)
+
+    def get(self, collection_id: str):
+        """
+        Retrieves a collection by its ID.
+
+        Args:
+            collection_id (str): The ID of the collection to retrieve.
+
+        Returns:
+            Collection: The retrieved collection object.
+
+        Raises:
+            Error: If the API request fails.
+        """
+        resp = self.session.get(f"{self.endpoint}/{collection_id}")
+        body = resp.json()
+        if resp.status_code >= 400:
+            error = body.get("error")
+            raise Error(**error)
+        c = body.get("result")
+        return Collection(**c)
+
+    def list(self):
+        """
+        Lists all collections.
+
+        Returns:
+            list[Collection]: A list of all collections.
+
+        Raises:
+            Error: If the API request fails.
+        """
+        resp = self.session.get(self.endpoint)
+        body = resp.json()
+        if resp.status_code >= 400:
+            error = body.get("error")
+            raise Error(**error)
+        return [Collection(**c) for c in body.get("result")]
+
+    def search(self, collection_id: str, text: str):
+        """
+        Searches within a collection based on the provided parameters.
+
+        Args:
+            params (SearchCollectionRequest): The search parameters.
+
+        Returns:
+            list[dict]: The search results.
+
+        Raises:
+            Error: If the API request fails.
+        """
+        endpoint = f"{self.search_endpoint}/{collection_id}/search"
+        req_body = {"text": text}
+        resp = self.session.post(endpoint, headers=self.headers, json=req_body)
+        body = resp.json()
+        if resp.status_code >= 400:
+            error = body.get("error")
+            raise Error(**error)
+        return [SearchResult(**c) for c in body.get("result")]
