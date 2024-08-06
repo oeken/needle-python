@@ -86,7 +86,7 @@ print(answer.choices[0].message.content)
 
 This is one basic example of a RAG pipeline you can quicklu implement using Needle and OpenAI. Feel free to engineer more precise prompts and explore other prompting techniques such as chain-of-thoughts (CoT), graph of thoughts (GoT) etc. 
 
-Needle API helps you with hassle-free contextualization however does not limit you to a certain RAG technique. Let us know what you build in our [Discord channel]()https://discord.gg/JzJcHgTyZx :)
+Needle API helps you with hassle-free contextualization however does not limit you to a certain RAG technique. Let us know what you build in our [Discord channel](https://discord.gg/JzJcHgTyZx) :)
 
 ## Exceptions 🧨
 

@@ -12,6 +12,24 @@ authors = [
 ]
 readme = "README.md"
 packages = [{ include = "needle" }]
+license = "MIT"
+keywords = [
+    "needle",
+    "api",
+    "retrieval-augmented generation",
+    "rag",
+    "information-retrieval",
+    "artificial intelligence",
+    "ai",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License",
+]
 
 [tool.poetry.urls]
 homepage = "https://needle-ai.com"
