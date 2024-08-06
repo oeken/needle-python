@@ -12,7 +12,7 @@ pip install needle-python
 
 ## Usage ⚡️
 
-To get started, generate an API key for your account in developer settings menu at (Needle)[https://needle-ai.com]. Note that your key will be valid until you revoke it. Set the following env variable before you run your code:
+To get started, generate an API key for your account in developer settings menu at [Needle](https://needle-ai.com). Note that your key will be valid until you revoke it. Set the following env variable before you run your code:
 
 ```
 export NEEDLE_API_KEY=<your-api-key>
@@ -86,7 +86,7 @@ print(answer.choices[0].message.content)
 
 This is one basic example of a RAG pipeline you can quicklu implement using Needle and OpenAI. Feel free to engineer more precise prompts and explore other prompting techniques such as chain-of-thoughts (CoT), graph of thoughts (GoT) etc. 
 
-Needle API helps you with hassle-free contextualization however does not limit you to a certain RAG technique. Let us know what you build in our (Discord channel)[https://discord.gg/JzJcHgTyZx] :)
+Needle API helps you with hassle-free contextualization however does not limit you to a certain RAG technique. Let us know what you build in our [Discord channel]()https://discord.gg/JzJcHgTyZx :)
 
 ## Exceptions 🧨
 
@@ -94,4 +94,4 @@ If a request to Needle API fails, `needle.v1.models.Error` object will be thrown
 
 # Support 📞
 
-If you have questions you can contact us in our (Discord channel)[https://discord.gg/JzJcHgTyZx]. 
+If you have questions you can contact us in our [Discord channel](https://discord.gg/JzJcHgTyZx). 
