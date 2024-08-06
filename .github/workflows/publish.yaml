@@ -18,7 +18,7 @@ jobs:
           cache: poetry
 
       - name: Install dependencies
-        run: poetry install --no-dev
+        run: poetry install --only main
 
       - name: Publish to PyPI
         run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}

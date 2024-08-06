@@ -65,9 +65,9 @@ system_messages = [{"role": "system", "content": r.content} for r in results] # 
 user_message = {
     "role": "system",
     "content": f"""
-    Do not hallucinate. Only answer the question based on the provided results data. 
-    If there is no data in the provided data for the question, do not try to generate an answer that does not make sense. 
-    This is the question: {prompt}
+        Do not hallucinate. Only answer the question based on the provided results data. 
+        If there is no data in the provided data for the question, do not try to generate an answer that does not make sense. 
+        This is the question: {prompt}
 """,
 }
 
@@ -92,6 +92,6 @@ Needle API helps you with hassle-free contextualization however does not limit y
 
 If a request to Needle API fails, `needle.v1.models.Error` object will be thrown. There you can see a `message` and more details about the error.
 
-# Support 📞
+## Support 📞
 
 If you have questions you can contact us in our [Discord channel](https://discord.gg/JzJcHgTyZx). 
