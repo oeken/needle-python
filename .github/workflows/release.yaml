@@ -1,4 +1,4 @@
-name: Publish Needle Python
+name: Release Needle Python
 
 on:
   release:
@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: Install poetry
+        run: pipx install poetry
 
       - uses: actions/setup-python@v5
         with:
