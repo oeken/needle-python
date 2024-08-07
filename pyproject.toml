@@ -44,3 +44,5 @@ requests = "^2.32.3"
 [tool.poetry.dev-dependencies]
 pytest = "^8.2.2"
 openai = "^1.39.0"
+ipykernel = "^6.29.5"
+ipywidgets = "^8.1.3"
