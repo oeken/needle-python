@@ -65,8 +65,8 @@ system_messages = [{"role": "system", "content": r.content} for r in results] # 
 user_message = {
     "role": "system",
     "content": f"""
-        Do not hallucinate. Only answer the question based on the provided results data. 
-        If there is no data in the provided data for the question, do not try to generate an answer that does not make sense. 
+        Only answer the question based on the provided results data. 
+        If there is no data in the provided data for the question, do not try to generate an answer.
         This is the question: {prompt}
 """,
 }
