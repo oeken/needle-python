@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "needle-python"
-version = "0.1.4"
+version = "0.2.0"
 description = "Needle client library for Python"
 authors = [
     "Onur Eken <m.onureken@gmail.com>",
