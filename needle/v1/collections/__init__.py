@@ -62,7 +62,15 @@ class NeedleCollections(NeedleBaseClient):
             error = body.get("error")
             raise Error(**error)
         c = body.get("result")
-        return Collection(**c)
+        return Collection(
+            id=c.get("id"),
+            name=c.get("name"),
+            embedding_model=c.get("embedding_model"),
+            embedding_dimensions=c.get("embedding_dimensions"),
+            search_queries=c.get("search_queries"),
+            created_at=c.get("created_at"),
+            updated_at=c.get("updated_at"),
+        )
 
     def get(self, collection_id: str):
         """
@@ -83,7 +91,15 @@ class NeedleCollections(NeedleBaseClient):
             error = body.get("error")
             raise Error(**error)
         c = body.get("result")
-        return Collection(**c)
+        return Collection(
+            id=c.get("id"),
+            name=c.get("name"),
+            embedding_model=c.get("embedding_model"),
+            embedding_dimensions=c.get("embedding_dimensions"),
+            search_queries=c.get("search_queries"),
+            created_at=c.get("created_at"),
+            updated_at=c.get("updated_at"),
+        )
 
     def list(self):
         """
@@ -100,7 +116,18 @@ class NeedleCollections(NeedleBaseClient):
         if resp.status_code >= 400:
             error = body.get("error")
             raise Error(**error)
-        return [Collection(**c) for c in body.get("result")]
+        return [
+            Collection(
+                id=c.get("id"),
+                name=c.get("name"),
+                embedding_model=c.get("embedding_model"),
+                embedding_dimensions=c.get("embedding_dimensions"),
+                search_queries=c.get("search_queries"),
+                created_at=c.get("created_at"),
+                updated_at=c.get("updated_at"),
+            )
+            for c in body.get("result")
+        ]
 
     def search(self, collection_id: str, text: str):
         """
@@ -122,4 +149,10 @@ class NeedleCollections(NeedleBaseClient):
         if resp.status_code >= 400:
             error = body.get("error")
             raise Error(**error)
-        return [SearchResult(**c) for c in body.get("result")]
+        return [
+            SearchResult(
+                content=r.get("content"),
+                file_id=r.get("file_id"),
+            )
+            for r in body.get("result")
+        ]

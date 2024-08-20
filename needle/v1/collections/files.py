@@ -50,7 +50,22 @@ class NeedleCollectionsFiles(NeedleBaseClient):
         if resp.status_code >= 400:
             error = body.get("error")
             raise Error(**error)
-        return [CollectionFile(**cf) for cf in body.get("result")]
+        return [
+            CollectionFile(
+                id=cf.get("id"),
+                name=cf.get("name"),
+                type=cf.get("type"),
+                url=cf.get("url"),
+                user_id=cf.get("user_id"),
+                connector_id=cf.get("connector_id"),
+                size=cf.get("size"),
+                md5_hash=cf.get("md5_hash"),
+                created_at=cf.get("created_at"),
+                updated_at=cf.get("updated_at"),
+                status=cf.get("status"),
+            )
+            for cf in body.get("result")
+        ]
 
     def list(self, collection_id: str):
         """
@@ -71,4 +86,19 @@ class NeedleCollectionsFiles(NeedleBaseClient):
         if resp.status_code >= 400:
             error = body.get("error")
             raise Error(**error)
-        return [CollectionFile(**cf) for cf in body.get("result")]
+        return [
+            CollectionFile(
+                id=cf.get("id"),
+                name=cf.get("name"),
+                type=cf.get("type"),
+                url=cf.get("url"),
+                user_id=cf.get("user_id"),
+                connector_id=cf.get("connector_id"),
+                size=cf.get("size"),
+                md5_hash=cf.get("md5_hash"),
+                created_at=cf.get("created_at"),
+                updated_at=cf.get("updated_at"),
+                status=cf.get("status"),
+            )
+            for cf in body.get("result")
+        ]
