@@ -1,5 +1,8 @@
 # Needle Python Library
 
+[![PyPI - Version](https://img.shields.io/pypi/v/needle-python.svg)](https://pypi.org/project/needle-python)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/needle-python.svg)](https://pypi.org/project/needle-python)
+
 This Python library provides convenient acccess to Needle API. There are various methods and data types which, we believe will help you explore Needle API quickly. There may be some functionality available in REST API earlier than this Python library. In any case, we recommend to take look the the complete [documentation](https://docs.needle-ai.com). Thank you for flying with us. 🚀
 
 ## Installation
@@ -95,3 +98,7 @@ If a request to Needle API fails, `needle.v1.models.Error` object will be thrown
 ## Support 📞
 
 If you have questions you can contact us in our [Discord channel](https://discord.gg/JzJcHgTyZx). 
+
+# License
+
+`needle-python` is distributed under the terms of the MIT license.

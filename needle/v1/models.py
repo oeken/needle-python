@@ -94,6 +94,29 @@ class CollectionFile:
 
 
 @dataclass(frozen=True)
+class CollectionDataStats:
+    """
+    Represents data statistics of a collection in the Needle API.
+    """
+
+    status: Optional[str]
+    files: int
+    bytes: int
+
+
+@dataclass(frozen=True)
+class CollectionStats:
+    """
+    Represents statistics of a collection in the Needle API.
+    """
+
+    data_stats: list[CollectionDataStats]
+    chunks_count: int
+    characters: int
+    users: int
+
+
+@dataclass(frozen=True)
 class SearchResult:
     """
     Represents a search result from the Needle API.
