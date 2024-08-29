@@ -12,6 +12,8 @@ from needle.v1.models import (
     Collection,
     Error,
     SearchResult,
+    CollectionStats,
+    CollectionDataStats,
 )
 from needle.v1.collections.files import NeedleCollectionsFiles
 
@@ -129,7 +131,13 @@ class NeedleCollections(NeedleBaseClient):
             for c in body.get("result")
         ]
 
-    def search(self, collection_id: str, text: str):
+    def search(
+        self,
+        collection_id: str,
+        text: str,
+        max_distance: Optional[float] = None,
+        top_k: Optional[int] = None,
+    ):
         """
         Searches within a collection based on the provided parameters.
 
@@ -143,7 +151,11 @@ class NeedleCollections(NeedleBaseClient):
             Error: If the API request fails.
         """
         endpoint = f"{self.search_endpoint}/{collection_id}/search"
-        req_body = {"text": text}
+        req_body = {
+            "text": text,
+            "max_distance": max_distance,
+            "top_k": top_k,
+        }
         resp = self.session.post(endpoint, headers=self.headers, json=req_body)
         body = resp.json()
         if resp.status_code >= 400:
@@ -156,3 +168,39 @@ class NeedleCollections(NeedleBaseClient):
             )
             for r in body.get("result")
         ]
+
+    def get_stats(self, collection_id: str):
+        """
+        Retrieves statistics of a collection.
+
+        Args:
+            collection_id (str): The ID of the collection to retrieve statistics for.
+
+        Returns:
+            dict: The collection statistics.
+
+        Raises:
+            Error: If the API request fails.
+        """
+        endpoint = f"{self.endpoint}/{collection_id}/stats"
+        resp = self.session.get(endpoint, headers=self.headers)
+        body = resp.json()
+        if resp.status_code >= 400:
+            error = body.get("error")
+            raise Error(**error)
+
+        result = body.get("result")
+        data_stats = [
+            CollectionDataStats(
+                status=ds.get("status"),
+                files=ds.get("files"),
+                bytes=ds.get("bytes"),
+            )
+            for ds in result.get("data_stats")
+        ]
+        return CollectionStats(
+            data_stats=data_stats,
+            chunks_count=result.get("chunks_count"),
+            characters=result.get("characters"),
+            users=result.get("users"),
+        )
