@@ -11,6 +11,7 @@ from needle.v1.models import (
     NeedleBaseClient,
 )
 from needle.v1.collections import NeedleCollections
+from needle.v1.files import NeedleFiles
 
 
 NEEDLE_DEFAULT_URL = "https://needle-ai.com"
@@ -46,3 +47,4 @@ class NeedleClient(NeedleBaseClient):
 
         # sub clients
         self.collections = NeedleCollections(config, headers)
+        self.files = NeedleFiles(config, headers)
